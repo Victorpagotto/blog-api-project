@@ -7,26 +7,26 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
       },
       title: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.DataTypes.STRING,
       },
       content: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.DataTypes.STRING,
       },
       published: {
-        type: Sequelize.DATE,
+        type: Sequelize.DataTypes.DATE,
         allowNull: false,
       },
       updated: {
-        type: Sequelize.DATE,
+        type: Sequelize.DataTypes.DATE,
         allowNull: false,
       },
       userId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         field: 'user_id',

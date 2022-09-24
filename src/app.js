@@ -1,9 +1,11 @@
 const express = require('express');
+const loginRouter = require('./routers/login.router');
 
 // ...
 
 const app = express();
 
+app.use('/login', loginRouter);
 app.use(express.json());
 
 // ...

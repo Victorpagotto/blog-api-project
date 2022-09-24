@@ -28,5 +28,12 @@ module.exports = (seq, dt) => {
     tableName: 'users',
     underscored: true,
   })
+
+  User.associate = (models) => {
+    User.hasMany(models.BlogPost, {
+      foreignKey: 'userId',
+      as: 'BlogPosts',
+    });
+  };
   return User;
 };

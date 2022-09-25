@@ -26,8 +26,9 @@ const create = async (userInfo) => {
 };
 
 const getAll = async () => {
-  const result = await User.findAll({ attributes: { exclude: ['password'] } });
-  return resultHandler('OK_FOUND', result, false);
+  const info = await User.findAll({ attributes: { exclude: ['password'] } });
+  const formatInfo = info.map((position) => position.dataValues);
+  return resultHandler('OK_FOUND', formatInfo, false);
 };
 
 module.exports = {

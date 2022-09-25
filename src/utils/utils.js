@@ -12,6 +12,7 @@ const statusHandler = (status) => statusList[status] || 500;
 
 const resultHandler = (status, info, isObject) => {
   if (isObject) return { status: statusHandler(status), result: { ...info } };
+  if (Array.isArray(info)) return { status: statusHandler(status), result: info };
   return { status: statusHandler(status), result: { ...info } };
 };
 

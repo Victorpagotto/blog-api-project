@@ -9,7 +9,8 @@ const create = async (userInfo) => {
 
 const getAll = async () => {
   const info = await Category.findAll();
-  if (info) return resultHandler('OK_FOUND', info, false);
+  const formatInfo = info.map((position) => position.dataValues);
+  if (info) return resultHandler('OK_FOUND', formatInfo, false);
   return resultHandler('SERVER_ERROR', { message: 'Server error.' }, true);
 };
 

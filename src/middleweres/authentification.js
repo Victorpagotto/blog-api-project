@@ -1,5 +1,5 @@
 const JWTToken = require('../authentication/JWTToken');
-const validateAll = require('../authentication/validateUserInfo');
+const validateAllUserInfo = require('../authentication/validateUserInfo');
 const userService = require('../services/user.service');
 const { resultHandler } = require('../utils/utils');
 
@@ -11,7 +11,7 @@ const JWTAuthentification = async (req, res, next) => {
   try {
     const user = await userService.getById(decoded.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
-    req.user = user;
+    req.user = user.result;
     next();
   } catch (err) {
     res.status(500).json({ message: 'Server error.' });
@@ -20,7 +20,7 @@ const JWTAuthentification = async (req, res, next) => {
 };
 
 const validateUserInfo = async (req, res, next) => {
-  const { status, result } = await validateAll(req.body);
+  const { status, result } = await validateAllUserInfo(req.body);
   if (result.message) {
     return res.status(status).json(result);
   }

@@ -1,18 +1,28 @@
 const statusList = {
   OK_FOUND: 200,
+  OK_CREATED: 201,
   NOT_FOUND: 404,
   BAD_REQUEST: 401,
+  BAD_FORMAT: 400,
   SERVER_ERROR: 500,
+  CONFLICT: 409,
 };
 
 const statusHandler = (status) => statusList[status] || 500;
 
-const resultHandler = (status, info, object) => {
-  if (object) return { status, result: { info } };
-  return { status, result: info };
+const resultHandler = (status, info, isObject) => {
+  if (isObject) return { status: statusHandler(status), result: { ...info } };
+  return { status: statusHandler(status), result: { ...info } };
 };
+
+const payloader = (info) => ({
+  userId: info.id,
+  name: info.displayName,
+  image: info.image || '',
+});
 
 module.exports = {
   statusHandler,
   resultHandler,
+  payloader,
 };

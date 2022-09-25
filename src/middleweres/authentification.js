@@ -1,4 +1,5 @@
 const JWTToken = require('../authentication/JWTToken');
+const validateAll = require('../authentication/validateUserInfo');
 const userService = require('../services/user.service');
 
 const JWTAuthentification = async (req, res, next) => {
@@ -16,4 +17,15 @@ const JWTAuthentification = async (req, res, next) => {
   }
 };
 
-module.exports = JWTAuthentification;
+const validateUserInfo = async (req, res, next) => {
+  const { status, result } = await validateAll(req.body);
+  if (result.message) {
+    return res.status(status).json(result);
+  }
+  next();
+};
+
+module.exports = {
+  JWTAuthentification,
+  validateUserInfo,
+};

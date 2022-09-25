@@ -15,7 +15,18 @@ const getByEmail = async (email) => {
     return info;
 };
 
+const create = async (userInfo) => {
+  const info = {
+    ...userInfo,
+    image: userInfo.image || '',
+  };
+  const result = await User.create(info);
+  if (result) return resultHandler('OK_CREATED', result, false);
+  return resultHandler('SERVER_ERROR', { message: 'Server error' }, true);
+};
+
 module.exports = {
   getById,
   getByEmail,
+  create,
 };

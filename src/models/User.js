@@ -19,7 +19,6 @@ module.exports = (seq, dt) => {
       type: dt.STRING,
     },
     image: {
-      allowNull: false,
       type: dt.STRING,
     }
   },

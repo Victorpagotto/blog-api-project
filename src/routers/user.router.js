@@ -7,5 +7,6 @@ const { validateUserInfo, JWTAuthentification } = require('../middleweres/authen
 userRouter.use(express.json());
 userRouter.post('/', validateUserInfo, userController.create);
 userRouter.get('/', JWTAuthentification, userController.getAll);
+userRouter.get('/:id', JWTAuthentification, userController.getById);
 
 module.exports = userRouter;

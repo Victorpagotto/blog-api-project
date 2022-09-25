@@ -8,7 +8,7 @@ const JWTAuthentification = async (req, res, next) => {
   const decoded = JWTToken.decoder(token);
   if (!decoded) res.status(401).json({ message: 'Expired or invalid token' });
   try {
-    const user = await userService.getById(decoded);
+    const user = await userService.getById(decoded.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
     req.user = user;
     next();

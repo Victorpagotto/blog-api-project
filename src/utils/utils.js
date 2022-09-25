@@ -16,8 +16,8 @@ const resultHandler = (status, info, isObject) => {
 };
 
 const payloader = (info) => ({
-  userId: info.id,
-  name: info.displayName,
+  id: info.id,
+  displayName: info.displayName,
   image: info.image || '',
 });
 

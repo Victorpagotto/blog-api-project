@@ -20,7 +20,14 @@ const getAll = async (req, res) => {
   return res.status(status).json(result);
 };
 
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const { status, result } = await userService.getById(id);
+  res.status(status).json(result);
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 };

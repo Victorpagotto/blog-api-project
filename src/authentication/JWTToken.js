@@ -10,9 +10,13 @@ const encoder = (payload) => {
   return jwt.sign({ data: { ...payload } }, srt, config);
 };
 
-const decoder = (token) => (
-  jwt.verify(token, srt)
-);
+const decoder = (token) => {
+  try {
+    return jwt.verify(token, srt).data;
+  } catch (_err) {
+    return false;
+  }
+};
 
 module.exports = {
   encoder,

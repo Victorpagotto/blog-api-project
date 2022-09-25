@@ -6,7 +6,7 @@ const create = async (req, res) => {
   const { body } = req;
   const info = await userService.create(body);
   if (info) {
-    const token = encoder(payloader(info));
+    const token = encoder(payloader(info.result));
     const { status, result } = resultHandler('OK_CREATED', { token }, false);
     return res.status(status).json(result);
   }
@@ -15,6 +15,12 @@ const create = async (req, res) => {
   return res.status(status).json(result);
 };
 
+const getAll = async (req, res) => {
+  const { status, result } = await userService.getAll();
+  return res.status(status).json(result);
+};
+
 module.exports = {
   create,
+  getAll,
 };

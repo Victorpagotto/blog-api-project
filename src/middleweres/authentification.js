@@ -4,11 +4,12 @@ const userService = require('../services/user.service');
 
 const JWTAuthentification = async (req, res, next) => {
   const token = req.header('Authorization');
-  if (!token) return res.status(401).json({ message: 'Token não encontrado' });
+  if (!token) return res.status(401).json({ message: 'Token not found' });
   const decoded = JWTToken.decoder(token);
+  if (!decoded) res.status(401).json({ message: 'Expired or invalid token' });
   try {
-    const user = await userService.getById(decoded.data.userId);
-    if (!user) return res.status(404).json({ message: 'Erro ao procurar usuário do token.' });
+    const user = await userService.getById(decoded);
+    if (!user) return res.status(404).json({ message: 'User not found' });
     req.user = user;
     next();
   } catch (err) {

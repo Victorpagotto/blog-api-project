@@ -25,8 +25,14 @@ const create = async (userInfo) => {
   return resultHandler('SERVER_ERROR', { message: 'Server error' }, true);
 };
 
+const getAll = async () => {
+  const result = await User.findAll({ attributes: { exclude: ['password'] } });
+  return resultHandler('OK_FOUND', result, false);
+};
+
 module.exports = {
   getById,
   getByEmail,
   create,
+  getAll,
 };

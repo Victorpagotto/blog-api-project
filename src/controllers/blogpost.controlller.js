@@ -1,5 +1,5 @@
 const validateAllPostInfo = require('../authentication/vallidatePostInfo');
-const blogPostService = require('../services/BlogPost.service');
+const blogPostService = require('../services/blogpost.service');
 
 const create = async (req, res) => {
   const validation = await validateAllPostInfo(req.body);
@@ -14,6 +14,12 @@ const create = async (req, res) => {
   return res.status(status).json(result);
 };
 
+const getAll = async (_req, res) => {
+  const { status, result } = await blogPostService.getAll();
+  return res.status(status).json(result);
+};
+
 module.exports = {
   create,
+  getAll,
 };

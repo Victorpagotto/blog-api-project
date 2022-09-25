@@ -1,10 +1,12 @@
-const { BlogPost, PostCategory, sequelize } = require('../models');
+const Sequelize = require('sequelize');
+const { BlogPost, PostCategory, User, Category } = require('../models');
+
 const { resultHandler } = require('../utils/utils');
 
 const create = async (postInfo, userInfo) => {
   const postLoad = { title: postInfo.title, content: postInfo.content, userId: userInfo.id };
   try {
-    return await sequelize.transaction(async (trs) => {
+    return await Sequelize.transaction(async (trs) => {
       const info = await BlogPost.create(postLoad, { transaction: trs });
       if (info) {
         const postCategoryLoad = postInfo.categoryIds.map((category) => (
@@ -21,6 +23,20 @@ const create = async (postInfo, userInfo) => {
   }
 };
 
+const getAll = async () => {
+  const info = await BlogPost
+    .findAll(
+      { include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } }] },
+    );
+  if (info) {
+    const formatInfo = info.map((position) => position.dataValues);
+    return resultHandler('OK_FOUND', formatInfo, false);
+  }
+  return resultHandler('SERVER_ERROR', { message: 'Server error.' }, true);
+};
+
 module.exports = {
   create,
+  getAll,
 };

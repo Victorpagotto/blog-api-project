@@ -5,7 +5,7 @@ const create = async (req, res) => {
   return res.status(status).json(result);
 };
 
-const getAll = async (req, res) => {
+const getAll = async (_req, res) => {
   const { status, result } = await categoryService.getAll();
   return res.status(status).json(result);
 };

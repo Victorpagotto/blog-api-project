@@ -50,7 +50,26 @@ const getById = async (id) => {
       { model: Category, as: 'categories', through: { attributes: [] } }] },
     );
     if (info) return resultHandler('OK_FOUND', info.dataValues, false);
-    return resultHandler('NOT_FOUND', { message: 'Post does not exist' });
+    return resultHandler('NOT_FOUND', { message: 'Post does not exist' }, true);
+  } catch (error) {
+    console.log(error);
+    return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
+  }
+};
+
+const update = async (id, userId, postInfo) => {
+  try {
+    const blogPost = await BlogPost.findOne({ where: { id } });
+    if (blogPost.userId === userId) {
+      await BlogPost.update({ ...postInfo }, { where: { id } });
+      const newBlogPost = await BlogPost.findOne(
+        { where: { id },
+          include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } }] },
+      );
+      return resultHandler('OK_FOUND', newBlogPost.dataValues, false);
+    }
+    return resultHandler('BAD_REQUEST', { message: 'Unauthorized user' }, true);
   } catch (error) {
     console.log(error);
     return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
@@ -61,4 +80,5 @@ module.exports = {
   create,
   getAll,
   getById,
+  update,
 };

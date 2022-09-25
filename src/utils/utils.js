@@ -6,6 +6,7 @@ const statusList = {
   BAD_FORMAT: 400,
   SERVER_ERROR: 500,
   CONFLICT: 409,
+  NOT_CONT: 204,
 };
 
 const statusHandler = (status) => statusList[status] || 500;

@@ -76,9 +76,25 @@ const update = async (id, userId, postInfo) => {
   }
 };
 
+const destroy = async (id, userId) => {
+  try {
+    const blogPost = await BlogPost.findOne({ where: { id } });
+    if (!blogPost) return resultHandler('NOT_FOUND', { message: 'Post does not exist' }, true);
+    if (blogPost.userId === userId) {
+      await BlogPost.destroy({ where: { id } });
+      return resultHandler('NOT_CONT', undefined, false);
+    }
+    return resultHandler('BAD_REQUEST', { message: 'Unauthorized user' }, true);
+  } catch (error) {
+    console.log(error);
+    return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  destroy,
 };

@@ -38,6 +38,7 @@ module.exports = (seq, dt) => {
     BlogPost.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'user',
+      onDelete: 'CASCADE',
     });
   };
 

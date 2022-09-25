@@ -32,6 +32,7 @@ module.exports = (seq, dt) => {
     User.hasMany(models.BlogPost, {
       foreignKey: 'userId',
       as: 'BlogPosts',
+      onDelete: 'CASCADE',
     });
   };
   return User;

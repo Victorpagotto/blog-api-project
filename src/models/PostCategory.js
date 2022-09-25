@@ -23,12 +23,14 @@ module.exports = (seq, dt) => {
       through: PostCategory,
       foreignKey: 'post_id',
       otherKey: 'category_id',
+      onDelete: 'CASCADE',
     });
     models.Category.belongsToMany(models.BlogPost, {
       as: 'blogPosts',
       through: PostCategory,
       foreignKey: 'category_id',
       otherKey: 'post_id',
+      onDelete: 'CASCADE',
     });
   };
 

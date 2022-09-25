@@ -6,10 +6,11 @@ const { JWTAuthentification } = require('../middleweres/authentification');
 
 postRouter.use(express.json());
 
-postRouter.post('/', JWTAuthentification, postController.create);
-postRouter.get('/', JWTAuthentification, postController.getAll);
+postRouter.get('/search', JWTAuthentification, postController.search);
 postRouter.get('/:id', JWTAuthentification, postController.getById);
 postRouter.put('/:id', JWTAuthentification, postController.update);
 postRouter.delete('/:id', JWTAuthentification, postController.destroy);
+postRouter.post('/', JWTAuthentification, postController.create);
+postRouter.get('/', JWTAuthentification, postController.getAll);
 
 module.exports = postRouter;

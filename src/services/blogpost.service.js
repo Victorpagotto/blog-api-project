@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, User, Category, sequelize } = require('../models');
 
 const SERVER_ERROR = 'Server error.';
@@ -91,10 +92,30 @@ const destroy = async (id, userId) => {
   }
 };
 
+const search = async (term) => {
+  try {
+    const info = await BlogPost.findAll({
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${term}%` } },
+          { content: { [Op.like]: `%${term}%` } },
+        ],
+      },
+      include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } }],
+    });
+    return resultHandler('OK_FOUND', info || [], false);
+  } catch (error) {
+    console.log(error);
+    return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
   destroy,
+  search,
 };

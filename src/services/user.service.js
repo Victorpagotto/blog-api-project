@@ -21,7 +21,7 @@ const create = async (userInfo) => {
     image: userInfo.image || '',
   };
   const result = await User.create(info);
-  if (result) return resultHandler('OK_CREATED', result, false);
+  if (result) return resultHandler('OK_CREATED', result.dataValues, false);
   return resultHandler('SERVER_ERROR', { message: 'Server error' }, true);
 };
 

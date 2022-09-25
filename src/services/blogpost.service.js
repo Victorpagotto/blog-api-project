@@ -1,12 +1,11 @@
-const Sequelize = require('sequelize');
-const { BlogPost, PostCategory, User, Category } = require('../models');
+const { BlogPost, PostCategory, User, Category, sequelize } = require('../models');
 
 const { resultHandler } = require('../utils/utils');
 
 const create = async (postInfo, userInfo) => {
   const postLoad = { title: postInfo.title, content: postInfo.content, userId: userInfo.id };
   try {
-    return await Sequelize.transaction(async (trs) => {
+    return await sequelize.transaction(async (trs) => {
       const info = await BlogPost.create(postLoad, { transaction: trs });
       if (info) {
         const postCategoryLoad = postInfo.categoryIds.map((category) => (
@@ -18,7 +17,7 @@ const create = async (postInfo, userInfo) => {
       return resultHandler('SERVER_ERROR', { message: 'Server error.' }, true);
     });
   } catch (err) {
-    console.log(`At BlogPost.service create: ${err}`);
+    console.log(err);
     return resultHandler('SERVER_ERROR', { message: 'Server error.' }, true);
   }
 };

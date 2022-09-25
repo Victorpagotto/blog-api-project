@@ -8,5 +8,6 @@ postRouter.use(express.json());
 
 postRouter.post('/', JWTAuthentification, postController.create);
 postRouter.get('/', JWTAuthentification, postController.getAll);
+postRouter.get('/:id', JWTAuthentification, postController.getById);
 
 module.exports = postRouter;

@@ -1,5 +1,7 @@
 const { BlogPost, PostCategory, User, Category, sequelize } = require('../models');
 
+const SERVER_ERROR = 'Server error.';
+
 const { resultHandler } = require('../utils/utils');
 
 const create = async (postInfo, userInfo) => {
@@ -14,28 +16,49 @@ const create = async (postInfo, userInfo) => {
         await PostCategory.bulkCreate(postCategoryLoad, { transaction: trs });
         return resultHandler('OK_CREATED', info.dataValues, false);
       }
-      return resultHandler('SERVER_ERROR', { message: 'Server error.' }, true);
+      return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
     });
   } catch (err) {
     console.log(err);
-    return resultHandler('SERVER_ERROR', { message: 'Server error.' }, true);
+    return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
   }
 };
 
 const getAll = async () => {
-  const info = await BlogPost
-    .findAll(
-      { include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: Category, as: 'categories', through: { attributes: [] } }] },
-    );
+  try {
+    const info = await BlogPost
+      .findAll(
+        { include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } }] },
+      );
   if (info) {
     const formatInfo = info.map((position) => position.dataValues);
     return resultHandler('OK_FOUND', formatInfo, false);
   }
-  return resultHandler('SERVER_ERROR', { message: 'Server error.' }, true);
+  return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
+  } catch (error) {
+    console.log(error);
+    return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
+  }
+};
+
+const getById = async (id) => {
+  try {
+    const info = await BlogPost.findOne(
+      { where: { id },
+        include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } }] },
+    );
+    if (info) return resultHandler('OK_FOUND', info.dataValues, false);
+    return resultHandler('NOT_FOUND', { message: 'Post does not exist' });
+  } catch (error) {
+    console.log(error);
+    return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
+  }
 };
 
 module.exports = {
   create,
   getAll,
+  getById,
 };

@@ -8,5 +8,6 @@ userRouter.use(express.json());
 userRouter.post('/', validateUserInfo, userController.create);
 userRouter.get('/', JWTAuthentification, userController.getAll);
 userRouter.get('/:id', JWTAuthentification, userController.getById);
+userRouter.delete('/me', JWTAuthentification, userController.destroy);
 
 module.exports = userRouter;

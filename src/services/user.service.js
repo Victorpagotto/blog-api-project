@@ -53,9 +53,20 @@ const getAll = async () => {
   }
 };
 
+const destroy = async (id) => {
+  try {
+    await User.destroy({ where: { id } });
+    return resultHandler('NOT_CONT', undefined, false);
+  } catch (error) {
+    console.log(error);
+    return resultHandler('SERVER_ERROR', { message: SERVER_ERROR }, true);
+  }
+};
+
 module.exports = {
   getById,
   getByEmail,
   create,
   getAll,
+  destroy,
 };

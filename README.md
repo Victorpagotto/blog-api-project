@@ -1,5 +1,3 @@
-# 🚧 README em construção 🚧
-
 <h1 align="center">Blog API</h1>
 
 -----------------------
@@ -34,18 +32,3 @@
 <p align="justify">Para realizar o uso desta API em seu computador, você precisará ter instalado o Node.js e o servidor de banco de dados MySQL, tendo-os funcionando corretamente. Preencha as variáveis de sistema no .env, retirando o .exemple, tornando-as assim ativas através da biblioteca dotenv pelo projeto. Antes de iniciar o projeto, instale as dependências com "npm install" e em seguida utilize o comando padrão "npm start". </p>
 
 -----------------------
-
-<!-- Olá, Tryber!
-
-Esse é apenas um arquivo inicial para o README do seu projeto.
-
-É essencial que você preencha esse documento por conta própria, ok?
-
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
-
--->

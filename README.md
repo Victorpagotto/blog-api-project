@@ -8,7 +8,7 @@
 
 **Conhecimentos Usados**: JavaScript e Sequelize.
 
-**Ferramentas usadas**: Node.js e MySQL.
+**Ferramentas usadas**: Node.js, JWT, Express e MySQL.
 
 **Número de Pessoas**: 1 (sozinho).
 
@@ -16,9 +16,9 @@
 
 <h2 align="center">Descrição</h2>
 
-<p align="justify"></p>
-<p align="justify"></p>
-<p align="justify"></p>
+<p align="justify">Desenvolvida como uma API capaz de suportar um blog, esta possui a capacidade de receber, devolver, pesquisar e manejar (CRUD) informações sobre usuários, posts e categorias em um banco de dados MySQL utilizando-se da abstração proveniente do Sequelize, uma ferramenta capaz de servir de interface entre o código da API e o banco de daods, com modelos de query prontos. Dito isso, a API é focada em desenvolver os serviços e controladores com base no Express e suas rotas.</p>
+<p align="justify">Todo o código é criado sobre os princípios do conceito de REST, possuindo então um manejo eficiente da integridade de dados - com validações, verificações e criptografia dos dados utilizando-se de JWT, possuindo  também respostas claras para aquele que  faz as requisições para a API. </p>
+<p align="justify">O principal desafio aqui era o manejo de informações utilizando-se do Sequelize, uma ferramenta com a qual não possuía total familiaridade. Entretanto o Sequelize mostra-se muito prático e eficiente, abstraindo o processo da criação de queries sem a perda de qualquer funcionalidade. Por ter sido feita a partir de Sequelize, a API pode ser facilmente adaptada a outros tipos de banco de dados, uma vez que a interface é capaz de se adaptar aos mesmos com a simples mudança de alguns parâmetros.</p>
 
 -----------------------
 

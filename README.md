@@ -65,6 +65,9 @@
 
 <h3 align="center">How to Install</h3>
 <p align="justify">In order to use this API on your computer, you'll need to have both Node.js and the MySQL database server installed and running. Fill the system variables in the .env, removing the .example, thus making them active through the dotenv library by the project. Before starting it, install the dependencies with "npm install" and then use the standard "npm start" command.</p>
-
+<p align="justify">Before anything, for you  to have your db up and running, and run the theses commands for creating and seeding it:</p>
+<p align="justify">npx sequelize db:create</p>
+<p align="justify">npx sequelize db:migrate</p>
+<p align="justify">npx sequelize db:seed:all</p>
 -----------------------
 

@@ -49,7 +49,7 @@
 
 <h3 align="center">Description</h3>
 
-<p align="justify">Developed as an API capable of supporting a blog, it can receive, return, search and handle (CRUD) information about users, posts and categories within a MySQL database using the abstraction from Sequelize, a tool capable of serving as an interface between the API code and the database, with already made query templates. That said, the API is focused on building services and controllers based on Express and its routes.</p>
+<p align="justify">Developed as an API capable of supporting a blog, it can receive, return, search and handle (CRUD) information about users, posts and categories within a MySQL database using the abstraction from Sequelize, a tool capable of serving as an interface between the API code and the database, with already built in query templates. That said, the API is focused on building services and controllers based on Express and its routes.</p>
 <p align="justify">All the code is created based in principles of the REST concept, thus having an efficient handling of data integrity - with validations, verifications and data encryption using JWT for correlation between users and functionalities/posts, also seeking clear answers with the routes' returns.</p>
 <p align="justify">The main challenge was managing information using Sequelize, a tool with which I was not fully familiar. However, Sequelize proves to be very practical and efficient, abstracting the process of creating queries without losing any functionality. As it was made from Sequelize, the API can be easily adapted to other database types, since the interface is able to adapt to them with the simple change of some parameters.</p>
 
